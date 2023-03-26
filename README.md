@@ -1,1 +1,1 @@
-# build python with mkit and github actions
+# build gpaw with mkit and github actions

@@ -2,7 +2,7 @@ name: Build
 on: [push, workflow_dispatch]
 
 env:
-  IMAGE: ghcr.io/dellelce/python-base
+  IMAGE: ghcr.io/dellelce/gpaw-base
 
 jobs:
   Build:
@@ -16,11 +16,11 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Mkit Python 
+      - name: Mkit GPAW
         run: docker build -t $IMAGE .
-      - name: Python check version
+      - name: GPAW check version
         run: |
-              PYTHON_VERSION=$(docker run --rm $IMAGE  /app/python/bin/python3 -V | awk ' NR == 1 { print $2; } ')
-              echo "PYTHON_VERSION=$PYTHON_VERSION" >> $GITHUB_ENV
+              GPAW_VERSION=$(docker run --rm $IMAGE  /app/gpaw/bin/gpaw --version | awk -F- ' NR == 1 { print $1; } ')
+              echo "GPAW_VERSION=$GPAW_VERSION" >> $GITHUB_ENV
       - name: Add tag & push
-        run: docker tag $IMAGE $IMAGE:$PYTHON_VERSION && docker push $IMAGE:$PYTHON_VERSION && docker push $IMAGE
+        run: docker tag $IMAGE $IMAGE:$GPAW_VERSION && docker push $IMAGE:$GPAW_VERSION && docker push $IMAGE

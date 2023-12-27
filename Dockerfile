@@ -1,4 +1,4 @@
-# Build GPAW using mkit.
+#Build GPAW using mkit.
 
 ARG PROFILE=gpaw
 

@@ -7,6 +7,6 @@ ARG PROFILE
 
 RUN ./mkit.sh profile=$PROFILE /app/$PROFILE
 
-FROM alpine:3.19 as target
+FROM alpine:3.8 as target
 
 COPY --from=build /app/$PROFILE /app/$PROFILE
